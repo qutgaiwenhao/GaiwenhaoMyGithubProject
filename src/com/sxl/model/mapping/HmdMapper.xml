@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sxl.dao.HmdDao">
+	<resultMap id="BaseResultMap" type="com.sxl.model.Hmd">
+		<id column="username" property="username"/>
+		<id column="email" property="email"/>
+	</resultMap>
+	
+	<insert id="insert">
+		insert into t_hmd(username,email) values(#{username},#{email})
+	</insert>
+	
+	<update id="update">
+	 update t_hmd
+	 <trim prefix="set" suffixOverrides=",">
+	  <if test="username!=null">username=#{username},</if>
+	  <if test="email!=null">email=#{email},</if>
+	 </trim>
+	 where id=#{id}
+	</update>
+	<select id="getById" resultMap="BaseResultMap"
+		parameterType="com.sxl.model.Hmd">
+		select * from t_hmd where id=#{id}
+	</select>
+	
+	<delete id="delete">  
+        delete from t_hmd where id=#{id}
+	</delete>
+	<select id="queryForList" resultMap="BaseResultMap"
+		parameterType="com.sxl.model.Hmd">
+		select * from t_hmd where 1=1 
+	</select>
+	<select id="countAll" resultType="java.lang.Integer" parameterType="com.sxl.model.Hmd">
+		select count(1) from t_hmd where 1=1 
+	</select>
+</mapper>

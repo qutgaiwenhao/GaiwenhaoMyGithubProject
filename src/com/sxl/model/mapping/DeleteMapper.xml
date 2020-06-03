@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sxl.dao.DeleteDao">
+	<resultMap id="BaseResultMap" type="com.sxl.model.Delete">
+		<id column="emailId" property="emailId"/>
+		<id column="title" property="title"/>
+		<id column="isd" property="isd"/>
+	</resultMap>
+	
+	<insert id="insert">
+		insert into t_delete(emailId,title,isd) values(#{emailId},#{title},#{isd})
+	</insert>
+	
+	<update id="update">
+	 update t_delete
+	 <trim prefix="set" suffixOverrides=",">
+	  <if test="emailId!=null">emailId=#{emailId},</if>
+	  <if test="title!=null">title=#{title},</if>
+	  <if test="isd!=null">isd=#{isd},</if>
+	 </trim>
+	 where id=#{id}
+	</update>
+	<select id="getById" resultMap="BaseResultMap"
+		parameterType="com.sxl.model.Delete">
+		select * from t_delete where id=#{id}
+	</select>
+	
+	<delete id="delete">  
+        delete from t_delete where id=#{id}
+	</delete>
+	<select id="queryForList" resultMap="BaseResultMap"
+		parameterType="com.sxl.model.Delete">
+		select * from t_delete where 1=1 
+	</select>
+	<select id="countAll" resultType="java.lang.Integer" parameterType="com.sxl.model.Delete">
+		select count(1) from t_delete where 1=1 
+	</select>
+</mapper>

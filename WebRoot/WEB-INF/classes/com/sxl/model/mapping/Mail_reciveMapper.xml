@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sxl.dao.Mail_reciveDao">
+	<resultMap id="BaseResultMap" type="com.sxl.model.Mail_recive">
+		<id column="v1" property="v1"/>
+		<id column="v2" property="v2"/>
+		<id column="v3" property="v3"/>
+		<id column="v4" property="v4"/>
+		<id column="v5" property="v5"/>
+		<id column="v6" property="v6"/>
+		<id column="status" property="status"/>
+		<id column="emailId" property="emailId"/>
+		<id column="isd" property="isd"/>
+	</resultMap>
+	
+	<insert id="insert">
+		insert into t_mail_recive(v1,v2,v3,v4,v5,v6,status,emailId,isd) values(#{v1},#{v2},#{v3},#{v4},#{v5},#{v6},#{status},#{emailId},#{isd})
+	</insert>
+	
+	<update id="update">
+	 update t_mail_recive
+	 <trim prefix="set" suffixOverrides=",">
+	  <if test="v1!=null">v1=#{v1},</if>
+	  <if test="v2!=null">v2=#{v2},</if>
+	  <if test="v3!=null">v3=#{v3},</if>
+	  <if test="v4!=null">v4=#{v4},</if>
+	  <if test="v5!=null">v5=#{v5},</if>
+	  <if test="v6!=null">v6=#{v6},</if>
+	  <if test="status!=null">status=#{status},</if>
+	  <if test="emailId!=null">emailId=#{emailId},</if>
+	  <if test="isd!=null">isd=#{isd},</if>
+	 </trim>
+	 where id=#{id}
+	</update>
+	<select id="getById" resultMap="BaseResultMap"
+		parameterType="com.sxl.model.Mail_recive">
+		select * from t_mail_recive where id=#{id}
+	</select>
+	
+	<delete id="delete">  
+        delete from t_mail_recive where id=#{id}
+	</delete>
+	<select id="queryForList" resultMap="BaseResultMap"
+		parameterType="com.sxl.model.Mail_recive">
+		select * from t_mail_recive where 1=1 
+	</select>
+	<select id="countAll" resultType="java.lang.Integer" parameterType="com.sxl.model.Mail_recive">
+		select count(1) from t_mail_recive where 1=1 
+	</select>
+</mapper>
